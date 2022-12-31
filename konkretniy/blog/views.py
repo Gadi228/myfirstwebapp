@@ -13,3 +13,6 @@ class PostListView(ListView):
 
 def home(request):
     return render(request, 'base.html')
+
+def Recipe(request):
+    return render(request, 'recipe.html')
