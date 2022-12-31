@@ -18,5 +18,4 @@ def home(request):
 def recipe(request):
     return render(request, 'recipe.html')
 
-def plus(a,b):
-    return a+b
+
