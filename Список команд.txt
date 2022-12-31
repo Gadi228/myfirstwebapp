@@ -1,0 +1,6 @@
+1. pip install django
+2. pip install --upgrade pip
+3. pip install pillow
+4. django-admin startproject "project_name"
+5. cd project_name
+6. python manage.py startapp "app_name"
