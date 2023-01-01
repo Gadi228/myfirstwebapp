@@ -1,4 +1,6 @@
+
 {% extends 'base.html' %}
+{% load static %}
 
 
 {% block content %}
@@ -9,7 +11,7 @@
                     <div class="row">
                         <div class="col-lg-8 col-md-8">
                             <div class="breadcrumb__text">
-                                <h2>Categories: <span>Recipes</span></h2>
+                                <h2>Categories: <span>{{ post_list.first.category.name }}</span></h2>
                                 <div class="breadcrumb__option">
                                     <a href="#">Home</a>
                                     <span>Recipes</span>
@@ -28,13 +30,13 @@
                                         </div>
                                         <div class="categories__post__item__text">
                                             <span class="post__label">{{ post.category }}</span>
-                                            <h3><a href="#">{{ post.title }}</a></h3>
+                                            <h3><a href="{{  post.get_absolute_url }}">{{ post.title }}</a></h3>
                                             <ul class="post__widget">
                                                 <li>by <span>{{ post.author }}</span></li>
                                                 <li>3 min read</li>
                                                 <li>20 Comment</li>
                                             </ul>
-                                            <p>{{ post.text|slice:":250" }}</p>
+                                            <p>{{ post.text|truncatewords:20 }}</p>
                                         </div>
                                     </div>
                                     {% endfor %}
@@ -129,7 +131,7 @@
                                     <div class="sidebar__item__title">
                                         <h6>About me</h6>
                                     </div>
-                                    <img src="img/sidebar/sidebar-about.jpg" alt="">
+                                    <img src="{% static 'img/sidebar/sidebar-about.jpg' %}" alt="">
                                     <h6>Hi every one! I,m <span>Lena Mollein.</span></h6>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                         incididunt ut labore et dolore magna aliqua.</p>
@@ -152,7 +154,7 @@
                                         <h6>Feature Posts</h6>
                                     </div>
                                     <div class="sidebar__feature__item__large set-bg"
-                                        data-setbg="img/sidebar/feature-post.jpg">
+                                        data-setbg="{% static 'img/sidebar/feature-post.jpg' %}">
                                         <div class="sidebar__feature__item__large--text">
                                             <span>Dinner</span>
                                             <h5><a href="#">This Japanese Way of Making Iced Coffee Is a Game...</a>
@@ -204,7 +206,7 @@
                                     </div>
                                 </div>
                                 <div class="sidebar__item__banner">
-                                    <img src="img/sidebar/banner.jpg" alt="">
+                                    <img src="{% static 'img/sidebar/banner.jpg' %}" alt="">
                                 </div>
                                 <div class="sidebar__item__categories">
                                     <div class="sidebar__item__title">
