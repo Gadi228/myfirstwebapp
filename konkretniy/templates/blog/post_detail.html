@@ -1,7 +1,8 @@
+{% extends 'base.html' %}
+
 {% block content %}
-    <!-- Single Post Section Begin -->
     <section class="single-post spad">
-        <div class="single-post__hero set-bg" data-setbg="{% static 'img/categories/single-post/single-post-hero.jpg' %}"></div>
+        <div class="single-post__hero set-bg" data-setbg="{{ post.image.url }}"></div>
         <div class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-8">
@@ -14,9 +15,9 @@
                             <ul class="label">
                                 <li>{{ post.category }}</li>
                             </ul>
-                            <h4>Weight loss diet: Ditching this one food can help you slim down fast - what is it?</h4>
+                            <h4>{{ post.title }}</h4>
                             <ul class="widget">
-                                <li>by Admin</li>
+                                <li>by {{ post.author }}</li>
                                 <li>3 min read</li>
                                 <li>20 Comment</li>
                             </ul>
@@ -34,68 +35,42 @@
                         <p>{{ post.text|truncatewords:20 }}</p>
                     </div>
                     <div class="single-post__recipe__details">
-                        <div class="single-post__recipe__details__option">
-                            <ul>
-                                <li>
-                                    <h5><i class="fa fa-user-o"></i> SERVES</h5>
-                                    <span>2 as a main, 4 as a side</span>
-                                </li>
-                                <li>
-                                    <h5><i class="fa fa-clock-o"></i> PREP TIME</h5>
-                                    <span>15 minute</span>
-                                </li>
-                                <li>
-                                    <h5><i class="fa fa-clock-o"></i> Cook TIME</h5>
-                                    <span>15 minute</span>
-                                </li>
-                                <li><a href="#" class="primary-btn"><i class="fa fa-print"></i> Read more</a></li>
-                            </ul>
-                        </div>
-                        <div class="single-post__recipe__details__indegradients">
-                            <h5>Ingredients</h5>
-                            <ul>
-                                <li>Ingredients</li>
-                                <li>1 cup (240 ml) water, plus more as needed</li>
-                                <li>1 teaspoon fine sea salt</li>
-                                <li>2 tablespoons olive oil</li>
-                                <li>3/4 cup (120 g) fine polenta</li>
-                                <li>3 cups sunflower oil, plus more as needed</li>
-                                <li>7 ounces (200 g) peeled parsnips, very thinly sliced on a mandoline</li>
-                                <li>1 pinch fine sea salt, plus more to taste</li>
-                                <li>2 tablespoons (30 g) unsalted butter</li>
-                                <li>1/2 tablespoon maple syrup (up to 1 tablespoon as needed)</li>
-                            </ul>
-                        </div>
-                        <div class="single-post__recipe__details__direction">
-                            <h5>Directions</h5>
-                            <ul>
-                                <li><span>1.</span> Combine all of the ingredients, kneading to form a smooth dough.
-                                </li>
-                                <li><span>2.</span> Allow the dough to rise, in a lightly greased, covered bowl, until
-                                    it’s doubled in size, about 90 minutes.</li>
-                                <li><span>3.</span> Gently divide the dough in half; it’ll deflate somewhat.</li>
-                                <li><span>4.</span> Gently shape the dough into two oval loaves; or, for longer loaves,
-                                    two 10″ to 11″ logs. Place the loaves on a lightly greased or parchment-lined baking
-                                    sheet. Cover and let rise until very puffy, about 1 hour. Towards the</li>
-                                <li><span>5.</span> end of the rising time, preheat the oven to 425°F.</li>
-                                <li><span>6.</span> Spray the loaves with lukewarm water.</li>
-                                <li><span>7.</span> Make two fairly deep diagonal slashes in each; a serrated bread
-                                    knife, wielded firmly, works well here.</li>
-                                <li><span>8.</span> Bake the bread for 25 to 30 minutes, until it’s a very deep golden
-                                    brown. Remove it from the oven, and cool on a rack.</li>
-                            </ul>
-                        </div>
-                    </div>
+                    {% for recipe in post.recipe.all %}
+              <div class="single-post__recipe__details__option">
+                <ul>
+                  <li>
+                    <h5><i class="fa fa-user-o"></i> SERVES</h5>
+                    <span>{{ recipe.serves }}</span>
+                  </li>
+                  <li>
+                    <h5><i class="fa fa-clock-o"></i> PREP TIME</h5>
+                    <span>{{ recipe.prep_time }}</span>
+                  </li>
+                  <li>
+                    <h5><i class="fa fa-clock-o"></i> Cook TIME</h5>
+                    <span>{{ recipe.cook_time }}</span>
+                  </li>
+                  <li><a href="#" class="primary-btn"><i class="fa fa-print"></i> Read more</a></li>
+                </ul>
+              </div>
 
+              <div class="single-post__recipe__details__indegradients">
+                <h5>Ingredients</h5>
+                {{ recipe.ingredients|safe }}
+              </div>
+              <div class="single-post__recipe__details__direction">
+                <h5>Directions</h5>
+                {{ recipe.directions|safe }}
+              </div>
+            {% endfor %}
+                        </div>
                     <div class="single-post__desc">
                         <p>{{ post.text }}</p>
                     </div>
-
                     <div class="single-post__tags">
-                        <a href="#">Food</a>
-                        <a href="#">Vegan</a>
-                        <a href="#">Tomato</a>
-                        <a href="#">Weightloss</a>
+                        {% for tag in post.tags.all %}
+                        <a href="#">{{ tag.name }}</a>
+                        {% endfor %}
                     </div>
                     <div class="single-post__next__previous">
                         <div class="row">
@@ -129,7 +104,7 @@
                     </div>
                     <div class="single-post__author__profile">
                         <div class="single-post__author__profile__pic">
-                            <img src="{% static 'img/categories/single-post/author-profile.jpg' %}" alt="">
+                            <img src="img/categories/single-post/author-profile.jpg" alt="">
                         </div>
                         <div class="single-post__author__profile__text">
                             <h4>Lena Mollein.</h4>
@@ -216,5 +191,4 @@
             </div>
         </div>
     </section>
-    <!-- Single Post Section End -->
-{% endblock %}
+{% endblock content %}

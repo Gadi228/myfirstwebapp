@@ -46,7 +46,7 @@ class Post(models.Model):
         on_delete=models.SET_NULL,
         null=True)
     tags = models.ManyToManyField(Tag, related_name="post")
-    slug = models.SlugField(max_length=200, default='')
+    slug = models.SlugField(max_length=200, unique=True)
 
 
     def __str__(self):

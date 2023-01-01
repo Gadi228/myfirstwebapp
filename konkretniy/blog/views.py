@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from blog.models import Post
 
@@ -12,7 +12,7 @@ class PostListView(ListView):
 
 
 
-class PostDetailView(ListView):
+class PostDetailView(DetailView):
     model = Post
     context_object_name = "post"
     slug_url_kwarg = 'post_slug'
