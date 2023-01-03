@@ -1,0 +1,13 @@
+{% load static menu_tags %}
+<nav class="header__menu">
+<ul>
+    <li class="active"><a href="/">Home</a></li>
+    {% get_last_post %}
+    {% get_categories %}
+
+
+
+    <li><a href="./about.html">About</a></li>
+    <li><a href="./contact.html">Contact</a></li>
+</ul>
+</nav>

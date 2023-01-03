@@ -1,0 +1,20 @@
+{% load static menu_tags %}
+<li><a href="#">Recipes</a>
+        <div class="header__megamenu__wrapper">
+            <div class="header__megamenu">
+                {% for post in last_post %}
+                <div class="header__megamenu__item">
+                    <div class="header__megamenu__item--pic set-bg"
+                        data-setbg="{{ post.image.url }}">
+                        <div class="label">{{ post.category.name }}</div>
+                    </div>
+                    <div class="header__megamenu__item--text">
+                        <h5>
+                            <a href="{{ post.get_absolute_url }}">{{ post.title|truncatewords:9 }}</a>
+                        </h5>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </li>
